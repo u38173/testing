@@ -1,0 +1,42 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout ') {
+            steps {
+                checkout([$class: 'GitSCM',
+                branches: [[name: '*/testing']], 
+                doGenerateSubmoduleConfigurations: false,
+                extensions: [[$class: 'RelativeTargetDirectory', 
+                relativeTargetDir: 'ajith']], 
+                submoduleCfg: [], 
+                userRemoteConfigs: [[url: 'https://github.com/u38173/testing.git']]])
+
+            }
+            
+        }
+        stage('Executing') {
+         steps {   
+             
+            sh "chmod  +x ajith/task1.sh"
+            sh "chmod  +x ajith/task2.sh"
+          
+          sh('ajith/task1.sh')   
+          sh('ajith/task2.sh')   
+         }
+        }
+        stage('Archiving'){
+         
+         steps {
+          archiveArtifacts "ajith/*.sh"   
+         }
+         }
+         stage('Final stage'){
+            steps {
+                echo "RESULT: ${currentBuild.currentResult}"
+            } 
+         } 
+         
+            
+        }
+        }
