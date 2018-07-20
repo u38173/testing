@@ -1,6 +1,6 @@
 ---
 - hosts: web
-  remote_user: ubuntu
+  remote_user: U38173
   become: yes
   become_method: sudo
   
@@ -14,20 +14,4 @@
   - name: print the message
     debug:
       msg: hello welcome
-
-  - name: create a folder
-    file:
-      path: /home/ubuntu/Ajith
-      state: directory
-      mode: 0777
-
-  - name: copy the apache file
-    copy:
-      src: /etc/apache2/apache2.conf
-      dest: /home/ubuntu/Ajith/
-      remote_src: yes
-
-  - name: Restart apache2
-    service:
-      name: apache2
-      state: restarted
+      
