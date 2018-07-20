@@ -1,8 +1,5 @@
 ---
-- hosts: web
-  remote_user: U38173
-  become: yes
-  become_method: sudo
+- hosts: localhost
   
   tasks:
   - name: testing the connection
