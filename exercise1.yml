@@ -1,0 +1,33 @@
+---
+- hosts: web
+  remote_user: ubuntu
+  become: yes
+  become_method: sudo
+  
+  tasks:
+  - name: testing the connection
+    ping:
+
+  - name: gather all facts
+    setup:
+
+  - name: print the message
+    debug:
+      msg: hello welcome
+
+  - name: create a folder
+    file:
+      path: /home/ubuntu/Ajith
+      state: directory
+      mode: 0777
+
+  - name: copy the apache file
+    copy:
+      src: /etc/apache2/apache2.conf
+      dest: /home/ubuntu/Ajith/
+      remote_src: yes
+
+  - name: Restart apache2
+    service:
+      name: apache2
+      state: restarted
