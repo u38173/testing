@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  
+  tasks:
+  - name: testing the connection
+    ping:
+
+  - name: gather all facts
+    setup:
+
+  - name: print the message
+    debug:
+      msg: hello welcome
+      
